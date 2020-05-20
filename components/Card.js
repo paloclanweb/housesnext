@@ -11,7 +11,7 @@ function Card({ propiedad }) {
 
   return (
     <CardStyled>
-      {propiedad.imagenPrincipal && (
+      {propiedad.pictureUrl && (
         <div className="poster">
           {/* <Link
             href="/propiedades/[categoria]/[slug]"
@@ -29,10 +29,7 @@ function Card({ propiedad }) {
 
       <div className="body">
         <h3>{propiedad.name}</h3>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: propiedad.description,
-          }}
+        {propiedad.description}
         />
       </div>
     </CardStyled>
