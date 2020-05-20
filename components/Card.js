@@ -11,9 +11,9 @@ function Card({ propiedad }) {
 
   return (
     <CardStyled>
-      {propiedad.pictureUrl && (
+      {propiedad.imagenPrincipal && (
         <div className="poster">
-          {/* <Link
+          <Link
             href="/propiedades/[categoria]/[slug]"
             as={`/propiedades/${propiedad.categoria.slug}/${propiedad.slug}`}
           >
@@ -22,15 +22,23 @@ function Card({ propiedad }) {
               alt=""
               className="src"
             />
-          </Link> */}
-          <img src={API_URL + propiedad.pictureUrl} alt="" className="src" />
+          </Link>
         </div>
       )}
 
       <div className="body">
-        <h3>{propiedad.name}</h3>
-        {propiedad.description}
+        <h3>{propiedad.Nombre}</h3>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: propiedad.descripcion.substring(0, 200) + `...`,
+          }}
         />
+        <Link
+          href="/propiedades/[categoria]/[slug]"
+          as={`/propiedades/${propiedad.categoria.slug}/${propiedad.slug}`}
+        >
+          <a>Read more</a>
+        </Link>
       </div>
     </CardStyled>
   );
@@ -45,6 +53,25 @@ const CardStyled = styled.div`
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
+  .poster img {
+    cursor: pointer;
+  }
+
+  .body {
+    padding: 20px;
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #666666;
+      line-height: 1.5;
+    }
+    a {
+      display: inline-block;
+      margin: 20px 0;
+    }
+  }
 `;
 
 export default Card;

@@ -13,12 +13,20 @@ function MyApp({ Component, pageProps, navigation }) {
         <>
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                {/* <Header navigation={navigation} /> */}
+                <Header navigation={navigation} />
                 <Component {...pageProps} />
             </ThemeProvider>
         </>
     )
 }
 
+const { publicRuntimeConfig } = getConfig()
+
+MyApp.getInitialProps = async () => {
+    const res = await fetch(`${publicRuntimeConfig.API_URL}/navigations`)
+    const navigation = await res.json()
+
+    return { navigation }
+}
 
 export default MyApp

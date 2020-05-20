@@ -27,7 +27,20 @@ function Header({ isDark, navigation }) {
 const HeaderStyled = styled.header`
     background: ${props => props.isDark ? '#000000' : '#efefef' };
     padding: 20px;
-  
+
+  .logo {
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      color: #333333;
+      font-weight: bold;
+      font-size: ${rem(20)};
+      margin-left: 20px;
+    }
   }
 `;
 

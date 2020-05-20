@@ -58,21 +58,28 @@ import { Flex, Box } from "reflexbox";
 const Home = ({ propiedades }) => {
   // console.log(propiedades);
 
-  return (    
-        propiedades.map((propiedad) => (
-          <div key={propiedad.id} >
+  return (
+    <Box variant="container">
+      <Box my={40} as="h2">Nuestras Propiedades</Box>
+      <Flex
+        justifyContent="space-between"
+        flexDirection={{ _: "column", md: "row" }}
+        mb={100}
+      >
+        {propiedades.map((propiedad) => (
+          <Box key={propiedad.id} width={{ _: "100%", md: "30%" }} variant="boxes">
             <Card propiedad={propiedad} />
-          </div>))
-    
+          </Box>
+        ))}
+      </Flex>
+    </Box>
   );
 };
 
 export async function getServerSideProps() {
- 
+  const { API_URL } = process.env;
 
-  const res = await fetch(
-    `https://skinet-netcore.herokuapp.com/api/houses/1/22`
-  );
+  const res = await fetch(`${API_URL}/propiedades`);
   const data = await res.json();
 
   return {
