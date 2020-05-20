@@ -31,7 +31,7 @@ function Card({ propiedad }) {
         <h3>{propiedad.name}</h3>
         <p
           dangerouslySetInnerHTML={{
-            __html: propiedad.description.substring(0, 200) + `...`,
+            __html: propiedad.description,
           }}
         />
       </div>
