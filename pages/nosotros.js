@@ -1,6 +1,4 @@
 // rsc
-import React from 'react';
-
 const nosotros = () => {
     return (
         <div>
