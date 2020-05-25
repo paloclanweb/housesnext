@@ -30,43 +30,41 @@ const Home = ({ propiedades }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  
   const { API_URL } = process.env;
-const datapost = {
-  filter: {
-    lang: "2",
-    startDate: "2020-07-12",
-    endDate: "2020-07-19",
-    destination: "181",
-    currency: "2",
-    limit: "10",
-    offset: "0",
-  },
-};
-if (ctx.req) {
-  
-    const port =  ctx.req.headers['x-forwarded-port'];
-
-    
-  const res = await fetch(
-    `${API_URL}:${port}/apirest-hotels/hotels/filters`,
-    {
-      method: "POST",
-      headers: {
-        "x-api-key": "AsulvbP0MPH4C3fqjeMUKYOeBfQ65VT54TrbZN99",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datapost),
-    }
-  );
-  console.log(res)
-  const data = await res.json();
-
-  return {
-    props: {
-      propiedades: data,
+  const datapost = {
+    filter: {
+      lang: "2",
+      startDate: "2020-07-12",
+      endDate: "2020-07-19",
+      destination: "181",
+      currency: "2",
+      limit: "10",
+      offset: "0",
     },
   };
+  if (ctx.req) {
+    const port = ctx.req.headers["x-forwarded-port"];
+
+    const res = await fetch(
+      `${API_URL}:${port}/apirest-hotels/hotels/filters`,
+      {
+        method: "POST",
+        headers: {
+          "x-api-key": "AsulvbP0MPH4C3fqjeMUKYOeBfQ65VT54TrbZN99",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datapost),
+      }
+    );
+    console.log(res);
+    const data = await res.json();
+
+    return {
+      props: {
+        propiedades: data,
+      },
+    };
+  }
 }
 
 export default Home;
