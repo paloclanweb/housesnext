@@ -4,41 +4,23 @@ import Link from "next/link";
 function Card({ propiedad }) {
   const { API_URL } = process.env;
 
-  if(!propiedad.categoria) {
-    propiedad.categoria = {};
-    propiedad.categoria.slug = 'uncategorized';
-  }
-
   return (
     <CardStyled>
-      {propiedad.imagenPrincipal && (
+      {propiedad.main_photo && (
         <div className="poster">
-          <Link
-            href="/propiedades/[categoria]/[slug]"
-            as={`/propiedades/${propiedad.categoria.slug}/${propiedad.slug}`}
-          >
-            <img
-              src={API_URL + propiedad.imagenPrincipal.formats.medium.url}
-              alt=""
-              className="src"
-            />
-          </Link>
+          <img src={propiedad.main_photo} alt="" className="src" />
         </div>
       )}
 
       <div className="body">
-        <h3>{propiedad.Nombre}</h3>
-        <p
+        <h3>{propiedad.hotel_name}</h3>
+        <div
           dangerouslySetInnerHTML={{
-            __html: propiedad.descripcion.substring(0, 200) + `...`,
+            __html: propiedad.summary,
           }}
         />
-        <Link
-          href="/propiedades/[categoria]/[slug]"
-          as={`/propiedades/${propiedad.categoria.slug}/${propiedad.slug}`}
-        >
-          <a>Read more</a>
-        </Link>
+
+        <a>Read more</a>
       </div>
     </CardStyled>
   );

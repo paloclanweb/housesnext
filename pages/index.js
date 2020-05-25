@@ -7,14 +7,20 @@ const Home = ({ propiedades }) => {
 
   return (
     <Box variant="container">
-      <Box my={40} as="h2">Nuestras Propiedades</Box>
+      <Box my={40} as="h2">
+        Nuestras Propiedades
+      </Box>
       <Flex
         justifyContent="space-between"
-        flexDirection={{ _: "column", md: "row" }}
+        flexDirection={{ _: "column", md: "column" }}
         mb={100}
       >
         {propiedades.map((propiedad) => (
-          <Box key={propiedad.id} width={{ _: "100%", md: "30%" }} variant="boxes">
+          <Box
+            key={propiedad.id_hotel}
+            width={{ _: "100%", md: "100%" }}
+            variant="boxes"
+          >
             <Card propiedad={propiedad} />
           </Box>
         ))}
@@ -25,8 +31,26 @@ const Home = ({ propiedades }) => {
 
 export async function getServerSideProps() {
   const { API_URL } = process.env;
-
-  const res = await fetch(`${API_URL}/propiedades`);
+const datapost = {
+  filter: {
+    lang: "2",
+    startDate: "2020-07-12",
+    endDate: "2020-07-19",
+    destination: "181",
+    currency: "2",
+    limit: "10",
+    offset: "0",
+  },
+};
+  const res = await fetch(`${API_URL}/apirest-hotels/hotels/filters`, {
+    method: "POST",
+    headers: {
+      "x-api-key": "AsulvbP0MPH4C3fqjeMUKYOeBfQ65VT54TrbZN99",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(datapost),
+  });
+  console.log(res)
   const data = await res.json();
 
   return {
