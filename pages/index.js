@@ -42,14 +42,17 @@ const datapost = {
     offset: "0",
   },
 };
-  const res = await fetch(`${API_URL}/apirest-hotels/hotels/filters`, {
-    method: "POST",
-    headers: {
-      "x-api-key": "AsulvbP0MPH4C3fqjeMUKYOeBfQ65VT54TrbZN99",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(datapost),
-  });
+  const res = await fetch(
+    `http://api.enjoycuba.travel/apirest-hotels/hotels/filters`,
+    {
+      method: "POST",
+      headers: {
+        "x-api-key": "AsulvbP0MPH4C3fqjeMUKYOeBfQ65VT54TrbZN99",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datapost),
+    }
+  );
   console.log(res)
   const data = await res.json();
 
