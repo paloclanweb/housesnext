@@ -29,7 +29,8 @@ const Home = ({ propiedades }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+  
   const { API_URL } = process.env;
 const datapost = {
   filter: {
@@ -42,8 +43,13 @@ const datapost = {
     offset: "0",
   },
 };
+if (ctx.req) {
+  
+    const port =  ctx.req.headers['x-forwarded-port'];
+
+    
   const res = await fetch(
-    `http://api.enjoycuba.travel/apirest-hotels/hotels/filters`,
+    `${API_URL}:${port}/apirest-hotels/hotels/filters`,
     {
       method: "POST",
       headers: {
